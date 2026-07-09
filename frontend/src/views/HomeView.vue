@@ -114,7 +114,7 @@ watch(
     </div>
 
     <div class="theme-surface flex items-center justify-between gap-4 rounded-sm px-4 py-4 md:px-6">
-      <button type="button" class="theme-button rounded-xl px-4 py-2 disabled:cursor-not-allowed disabled:opacity-40"
+      <button type="button" class="theme-button rounded-sm px-4 py-2 disabled:cursor-not-allowed disabled:opacity-40"
         :disabled="!hasPreviousPage" @click="goToPage(page - 1)">
         Previous
       </button>
@@ -123,7 +123,7 @@ watch(
         Page {{ page }} of {{ totalPages }}
       </p>
 
-      <button type="button" class="theme-button rounded-xl px-4 py-2 disabled:cursor-not-allowed disabled:opacity-40"
+      <button type="button" class="theme-button rounded-sm px-4 py-2 disabled:cursor-not-allowed disabled:opacity-40"
         :disabled="!hasNextPage" @click="goToPage(page + 1)">
         Next
       </button>
