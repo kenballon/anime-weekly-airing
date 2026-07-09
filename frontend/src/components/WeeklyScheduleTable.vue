@@ -22,11 +22,6 @@ const formatTime = (airingAt: number) =>
 
 const formatTitle = (title: string | null) => title || 'Untitled'
 
-const formatStatus = (status: string | null) => {
-  if (status === 'NOT_YET_RELEASED') return 'To Be Released'
-  return status || 'TBA'
-}
-
 const setActiveEntry = (entry: AiringScheduleItem) => {
   activeEntry.value = entry
   showPreview.value = true
@@ -104,14 +99,6 @@ const hidePreview = () => {
                   {{ formatTitle(entry.media.title.english || entry.media.title.romaji) }}
                 </p>
 
-                <!-- <div class="mt-3 flex flex-wrap gap-2">
-                  <span class="theme-chip rounded-full px-2.5 py-1 text-[11px]">
-                    {{ entry.media.format || 'TBA' }}
-                  </span>
-                  <span class="theme-chip rounded-full px-2.5 py-1 text-[11px]">
-                    {{ formatStatus(entry.media.status) }}
-                  </span>
-                </div> -->
               </button>
 
               <p v-if="day.entries.length === 0" class="px-1 py-2 text-xs theme-subtle">
