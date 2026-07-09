@@ -27,7 +27,7 @@ const setActiveEntry = (entry: AiringScheduleItem) => {
   showPreview.value = true
 }
 
-const updatePreviewPosition = (event: MouseEvent) => {
+const updatePreviewPosition = (event: MouseEvent | FocusEvent) => {
   const previewWidth = 320
   const previewHeight = 420
   const offsetX = 18
@@ -37,9 +37,22 @@ const updatePreviewPosition = (event: MouseEvent) => {
   const maxX = window.innerWidth - previewWidth - padding
   const maxY = window.innerHeight - previewHeight - padding
 
+  if ('clientX' in event && 'clientY' in event) {
+    previewPosition.value = {
+      x: Math.min(event.clientX + offsetX, Math.max(padding, maxX)),
+      y: Math.min(event.clientY + offsetY, Math.max(padding, maxY)),
+    }
+    return
+  }
+
+  const target = event.target as HTMLElement | null
+  const rect = target?.getBoundingClientRect()
+
+  if (!rect) return
+
   previewPosition.value = {
-    x: Math.min(event.clientX + offsetX, Math.max(padding, maxX)),
-    y: Math.min(event.clientY + offsetY, Math.max(padding, maxY)),
+    x: Math.min(rect.left + rect.width / 2 + offsetX, Math.max(padding, maxX)),
+    y: Math.min(rect.top + rect.height / 2 + offsetY, Math.max(padding, maxY)),
   }
 }
 
