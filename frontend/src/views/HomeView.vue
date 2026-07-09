@@ -63,7 +63,7 @@ watch(
 
 <template>
   <section class="mx-auto flex min-h-screen w-full max-w-[1600px] flex-col gap-8 px-4 py-6 md:px-6 lg:px-8">
-    <div class="theme-surface rounded-sm p-5 md:p-6">
+    <div class="rounded-sm p-5 md:p-6">
       <div class="flex flex-col gap-5 xl:flex-row xl:items-end xl:justify-between">
         <div>
           <p class="text-xs uppercase tracking-[0.18em] theme-subtle">Anime Explorer</p>
