@@ -56,7 +56,7 @@ const updatePreviewPosition = (event: MouseEvent | FocusEvent) => {
   }
 }
 
-const setPreviewFromEvent = (entry: AiringScheduleItem, event: MouseEvent) => {
+const setPreviewFromEvent = (entry: AiringScheduleItem, event: MouseEvent | FocusEvent) => {
   setActiveEntry(entry)
   updatePreviewPosition(event)
 }
