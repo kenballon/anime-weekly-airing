@@ -1,0 +1,207 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #f4f7fb;
+  --surface: rgba(255, 255, 255, 0.92);
+  --surface-strong: #ffffff;
+  --surface-soft: rgba(241, 245, 249, 0.95);
+  --text: #0f172a;
+  --text-muted: #5b6475;
+  --text-subtle: #768196;
+  --border: rgba(148, 163, 184, 0.32);
+  --shadow:
+    rgba(15, 23, 42, 0.08) 0 18px 50px,
+    rgba(15, 23, 42, 0.04) 0 3px 10px;
+  --accent: #2563eb;
+  --accent-soft: rgba(37, 99, 235, 0.12);
+  --accent-strong: #1d4ed8;
+  --success: #15803d;
+  --success-soft: rgba(21, 128, 61, 0.12);
+  --warning: #b45309;
+  --warning-soft: rgba(180, 83, 9, 0.12);
+  --danger: #b91c1c;
+  --danger-soft: rgba(185, 28, 28, 0.12);
+  --chip-bg: rgba(255, 255, 255, 0.7);
+  --chip-text: #0f172a;
+  --app-glow:
+    radial-gradient(circle at top left, rgba(59, 130, 246, 0.12), transparent 30%),
+    radial-gradient(circle at top right, rgba(16, 185, 129, 0.08), transparent 26%),
+    radial-gradient(circle at bottom right, rgba(168, 85, 247, 0.08), transparent 24%);
+
+  --sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --heading: var(--sans);
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  font: 18px/145% var(--sans);
+  letter-spacing: 0;
+  color-scheme: light;
+  color: var(--text);
+  background: var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  @media (max-width: 1024px) {
+    font-size: 16px;
+  }
+}
+
+:root[data-theme='dark'] {
+  --bg: #0b1020;
+  --surface: rgba(15, 23, 42, 0.9);
+  --surface-strong: #111827;
+  --surface-soft: rgba(30, 41, 59, 0.92);
+  --text: #e5e7eb;
+  --text-muted: #9ca3af;
+  --text-subtle: #cbd5e1;
+  --border: rgba(148, 163, 184, 0.18);
+  --shadow:
+    rgba(0, 0, 0, 0.45) 0 20px 60px,
+    rgba(0, 0, 0, 0.2) 0 6px 20px;
+  --accent: #60a5fa;
+  --accent-soft: rgba(96, 165, 250, 0.16);
+  --accent-strong: #93c5fd;
+  --success: #4ade80;
+  --success-soft: rgba(74, 222, 128, 0.12);
+  --warning: #fbbf24;
+  --warning-soft: rgba(251, 191, 36, 0.12);
+  --danger: #f87171;
+  --danger-soft: rgba(248, 113, 113, 0.12);
+  --chip-bg: rgba(30, 41, 59, 0.95);
+  --chip-text: #e5e7eb;
+  color-scheme: dark;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+}
+
+#app {
+  min-height: 100svh;
+  background: var(--bg);
+  background-image: var(--app-glow);
+  color: var(--text);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--heading);
+  color: var(--text);
+}
+
+h1 {
+  font-size: 56px;
+  line-height: 1.05;
+  letter-spacing: 0;
+  margin: 0;
+
+  @media (max-width: 1024px) {
+    font-size: 36px;
+  }
+}
+
+h2 {
+  font-size: 24px;
+  line-height: 118%;
+  letter-spacing: 0;
+  margin: 0;
+
+  @media (max-width: 1024px) {
+    font-size: 20px;
+  }
+}
+
+p {
+  margin: 0;
+}
+
+.theme-surface {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(18px);
+}
+
+.theme-surface-strong {
+  background: var(--surface-strong);
+  border: 1px solid var(--border);
+}
+
+.theme-soft {
+  background: var(--surface-soft);
+  border: 1px solid var(--border);
+}
+
+.theme-muted {
+  color: var(--text-muted);
+}
+
+.theme-subtle {
+  color: var(--text-subtle);
+}
+
+.theme-chip {
+  background: var(--chip-bg);
+  color: var(--chip-text);
+  border: 1px solid var(--border);
+}
+
+.theme-button {
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  transition:
+    border-color 160ms ease,
+    background-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.theme-button:hover {
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.theme-button-active {
+  background: var(--accent);
+  color: white;
+  border-color: transparent;
+}
+
+.theme-accent {
+  color: var(--accent);
+}
+
+.theme-entry {
+  background: var(--surface-soft);
+  border: 1px solid var(--border);
+  transition:
+    border-color 160ms ease,
+    transform 160ms ease,
+    box-shadow 160ms ease,
+    background-color 160ms ease;
+}
+
+.theme-entry:hover,
+.theme-entry:focus-within {
+  border-color: var(--accent);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow);
+}
+
+.theme-preview {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.16), transparent 44%),
+    var(--surface-strong);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
