@@ -101,19 +101,19 @@ watch(
       </div>
     </div>
 
-    <div v-if="loading" class="theme-surface rounded-3xl px-4 py-10 text-center theme-muted">
+    <div v-if="loading" class="theme-surface rounded-sm px-4 py-10 text-center theme-muted">
       Loading anime...
     </div>
 
-    <div v-else-if="error" class="theme-surface rounded-3xl px-4 py-10 text-red-400">
+    <div v-else-if="error" class="theme-surface rounded-sm px-4 py-10 text-red-400">
       Error: {{ error }}
     </div>
 
-    <div v-else class="grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-5 xl:gap-6">
+    <div v-else class="grid grid gap-4 md:grid-cols-3 xl:grid-cols-5 xl:gap-6">
       <AnimeCard v-for="anime in animes" :key="anime.id" :anime="anime" />
     </div>
 
-    <div class="theme-surface flex items-center justify-between gap-4 rounded-3xl px-4 py-4 md:px-6">
+    <div class="theme-surface flex items-center justify-between gap-4 rounded-sm px-4 py-4 md:px-6">
       <button type="button" class="theme-button rounded-xl px-4 py-2 disabled:cursor-not-allowed disabled:opacity-40"
         :disabled="!hasPreviousPage" @click="goToPage(page - 1)">
         Previous
