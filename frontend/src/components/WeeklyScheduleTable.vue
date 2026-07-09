@@ -90,17 +90,17 @@ const hidePreview = () => {
         Error: {{ error }}
       </div>
 
-      <div v-else class="overflow-x-auto pb-1">
-        <div class="min-w-245 grid grid-cols-7 gap-3">
+      <div v-else class="pb-1">
+        <div class="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-7">
           <article v-for="day in days" :key="day.key" class="theme-day overflow-hidden rounded-2xl">
-            <header class="border-b border-(--border) px-3 py-3">
+            <header class="border-b border-(--border) px-4 py-3 md:px-3">
               <p class="text-sm font-semibold">{{ day.label }}</p>
               <p class="mt-1 text-xs theme-muted">{{ day.entries.length }} airing</p>
             </header>
 
             <div class="space-y-2 p-3">
               <button v-for="entry in day.entries" :key="entry.id" type="button"
-                class="theme-entry group w-full p-3 text-left rounded-sm"
+                class="theme-entry group w-full rounded-sm p-3 text-left"
                 @mouseenter="setPreviewFromEvent(entry, $event)" @mousemove="updatePreviewPosition"
                 @focus="setPreviewFromEvent(entry, $event)" @mouseleave="hidePreview" @blur="hidePreview">
                 <div class="flex items-center justify-between gap-2 text-xs theme-subtle">
