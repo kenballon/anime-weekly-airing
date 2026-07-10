@@ -98,9 +98,9 @@ const hidePreview = () => {
               <p class="mt-1 text-xs theme-muted">{{ day.entries.length }} airing</p>
             </header>
 
-            <div class="space-y-2 p-3">
+            <div class="space-y-2 py-2">
               <button v-for="entry in day.entries" :key="entry.id" type="button"
-                class="theme-entry group w-full rounded-sm p-3 text-left"
+                class="theme-entry group w-full rounded-sm p-2 text-left"
                 @mouseenter="setPreviewFromEvent(entry, $event)" @mousemove="updatePreviewPosition"
                 @focus="setPreviewFromEvent(entry, $event)" @mouseleave="hidePreview" @blur="hidePreview">
                 <div class="flex items-center justify-between gap-2 text-xs theme-subtle">
@@ -108,7 +108,7 @@ const hidePreview = () => {
                   <span>Ep {{ entry.episode }}</span>
                 </div>
 
-                <p class="mt-2 line-clamp-2 text-sm font-medium leading-snug capitalize">
+                <p class="my-2 line-clamp-1 text-[14px] font-medium leading-snug capitalize">
                   {{ formatTitle(entry.media.title.english || entry.media.title.romaji) }}
                 </p>
 
