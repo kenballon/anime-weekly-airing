@@ -113,6 +113,7 @@ export function useAnime() {
     const season = ref<AnimeSeason>(currentSeason.season)
     const year = ref<number>(currentSeason.year)
     const mediaFilter = ref<AnimeMediaFilter>('ALL')
+    const search = ref('')
     const page = ref(1)
     const perPage = ref(15)
     const totalPages = ref(1)
@@ -137,7 +138,7 @@ export function useAnime() {
         try {
             const formatFilter = getFormatFilter()
             const query = `
-                query CurrentSeasonAnime($season: MediaSeason, $seasonYear: Int, $page: Int, $perPage: Int) {
+                query CurrentSeasonAnime($season: MediaSeason, $seasonYear: Int, $search: String, $page: Int, $perPage: Int) {
                     Page(page: $page, perPage: $perPage) {
                         pageInfo {
                             currentPage
@@ -148,6 +149,7 @@ export function useAnime() {
                             type: ANIME
                             season: $season
                             seasonYear: $seasonYear
+                            search: $search
                             ${formatFilter}
                             sort: POPULARITY_DESC
                         ) {
@@ -186,6 +188,7 @@ export function useAnime() {
                     variables: {
                         season: season.value,
                         seasonYear: year.value,
+                        search: search.value.trim() || null,
                         page: page.value,
                         perPage: perPage.value,
                     },
@@ -331,6 +334,7 @@ export function useAnime() {
         season,
         year,
         mediaFilter,
+        search,
         page,
         perPage,
         totalPages,

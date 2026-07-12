@@ -14,6 +14,7 @@ const {
   season,
   year,
   mediaFilter,
+  search,
   page,
   totalPages,
   hasNextPage,
@@ -44,13 +45,12 @@ const goToPage = async (nextPage: number) => {
 }
 
 watch(
-  [season, year, mediaFilter],
+  [season, year, mediaFilter, search],
   (_, __, onCleanup) => {
     page.value = 1
 
     const timer = window.setTimeout(() => {
       fetchAnime()
-      fetchWeeklySchedule()
     }, 250)
 
     onCleanup(() => {
@@ -59,6 +59,10 @@ watch(
   },
   { immediate: true },
 )
+
+watch([season, year, mediaFilter], () => {
+  fetchWeeklySchedule()
+}, { immediate: true })
 </script>
 
 <template>
@@ -97,6 +101,12 @@ watch(
               </option>
             </select>
           </label>
+
+          <label class="flex flex-col gap-1 text-sm">
+            Search anime
+            <input v-model="search" type="search" placeholder="Search by title" autocomplete="off"
+              class="theme-button w-52 rounded-sm px-3 py-2" aria-label="Search anime by title">
+          </label>
         </div>
       </div>
     </div>
@@ -113,7 +123,11 @@ watch(
       <AnimeCard v-for="anime in animes" :key="anime.id" :anime="anime" />
     </div>
 
-    <div class="theme-surface flex items-center justify-between gap-4 rounded-sm px-4 py-4 md:px-6">
+    <div v-if="!loading && !error && animes.length === 0" class="theme-surface rounded-sm px-4 py-10 text-center theme-muted">
+      No anime found{{ search.trim() ? ` for “${search.trim()}”` : '' }}.
+    </div>
+
+    <div v-if="!loading && !error && animes.length > 0" class="theme-surface flex items-center justify-between gap-4 rounded-sm px-4 py-4 md:px-6">
       <button type="button" class="theme-button rounded-sm px-4 py-2 disabled:cursor-not-allowed disabled:opacity-40"
         :disabled="!hasPreviousPage" @click="goToPage(page - 1)">
         Previous
