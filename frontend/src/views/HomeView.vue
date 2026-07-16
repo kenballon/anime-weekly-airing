@@ -88,6 +88,8 @@ watch(
 )
 
 watch(search, (_, __, onCleanup) => {
+  page.value = 1
+
   const timer = window.setTimeout(() => {
     fetchAnime()
   }, 250)
@@ -174,7 +176,7 @@ watch([season, year, mediaFilter], () => {
       Error: {{ error }}
     </div>
 
-    <div v-else class="grid grid gap-4 md:grid-cols-3 xl:grid-cols-5 xl:gap-6">
+    <div v-else class="grid grid gap-4 md:grid-cols-3 xl:grid-cols-5 xl:gap-6 px-5">
       <AnimeCard v-for="anime in animes" :key="anime.id" :anime="anime" />
     </div>
 
@@ -183,21 +185,23 @@ watch([season, year, mediaFilter], () => {
       No anime found{{ search.trim() ? ` for “${search.trim()}”` : '' }}.
     </div>
 
-    <div v-if="!loading && !error && animes.length > 0"
-      class="theme-surface flex items-center justify-between gap-4 rounded-sm px-4 py-4 md:px-6">
-      <button type="button" class="theme-button rounded-sm px-4 py-2 disabled:cursor-not-allowed disabled:opacity-40"
-        :disabled="!hasPreviousPage" @click="goToPage(page - 1)">
-        Previous
-      </button>
+    <div class="px-5">
+      <div v-if="!loading && !error && animes.length > 0"
+        class="theme-surface flex items-center justify-between gap-4 rounded-sm px-4 py-4 md:px-6">
+        <button type="button" class="theme-button rounded-sm px-4 py-2 disabled:cursor-not-allowed disabled:opacity-40"
+          :disabled="!hasPreviousPage" @click="goToPage(page - 1)">
+          Previous
+        </button>
 
-      <p class="text-sm theme-muted">
-        Page {{ page }} of {{ totalPages }}
-      </p>
+        <p class="text-sm theme-muted">
+          Page {{ page }} of {{ totalPages }}
+        </p>
 
-      <button type="button" class="theme-button rounded-sm px-4 py-2 disabled:cursor-not-allowed disabled:opacity-40"
-        :disabled="!hasNextPage" @click="goToPage(page + 1)">
-        Next
-      </button>
+        <button type="button" class="theme-button rounded-sm px-4 py-2 disabled:cursor-not-allowed disabled:opacity-40"
+          :disabled="!hasNextPage" @click="goToPage(page + 1)">
+          Next
+        </button>
+      </div>
     </div>
 
     <WeeklyScheduleTable :days="weeklyScheduleDays" :label="weeklyScheduleLabel" :loading="scheduleLoading"

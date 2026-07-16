@@ -68,61 +68,63 @@ const hidePreview = () => {
 </script>
 
 <template>
-  <section class="theme-surface rounded-sm p-5 md:p-6">
-    <div class="space-y-5">
-      <div class="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-        <div>
-          <p class="text-xs uppercase tracking-[0.18em] theme-subtle">Weekly Airing Schedule</p>
-          <h2 class="mt-1 text-2xl font-semibold">Monday to Sunday lineup</h2>
-          <p class="mt-1 text-sm theme-muted">{{ label }}</p>
+  <div class="px-5">
+    <section class="theme-surface rounded-sm p-5 md:p-6">
+      <div class="space-y-5">
+        <div class="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p class="text-xs uppercase tracking-[0.18em] theme-subtle">Weekly Airing Schedule</p>
+            <h2 class="mt-1 text-2xl font-semibold">Monday to Sunday lineup</h2>
+            <p class="mt-1 text-sm theme-muted">{{ label }}</p>
+          </div>
         </div>
-      </div>
 
-      <div v-if="isMovieFilter" class="theme-soft rounded-2xl px-4 py-3 text-sm theme-muted">
-        Weekly airing schedules are for TV shows, so switch the type filter to Shows or All to see entries here.
-      </div>
+        <div v-if="isMovieFilter" class="theme-soft rounded-2xl px-4 py-3 text-sm theme-muted">
+          Weekly airing schedules are for TV shows, so switch the type filter to Shows or All to see entries here.
+        </div>
 
-      <div v-else-if="loading" class="rounded-2xl theme-soft px-4 py-6 text-center text-sm theme-muted">
-        Loading weekly schedule...
-      </div>
+        <div v-else-if="loading" class="rounded-2xl theme-soft px-4 py-6 text-center text-sm theme-muted">
+          Loading weekly schedule...
+        </div>
 
-      <div v-else-if="error" class="rounded-2xl theme-soft px-4 py-6 text-sm text-red-400">
-        Error: {{ error }}
-      </div>
+        <div v-else-if="error" class="rounded-2xl theme-soft px-4 py-6 text-sm text-red-400">
+          Error: {{ error }}
+        </div>
 
-      <div v-else class="pb-1">
-        <div class="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-7">
-          <article v-for="day in days" :key="day.key" class="theme-day overflow-hidden rounded-2xl">
-            <header class="border-b border-(--border) px-4 py-3 md:px-3">
-              <p class="text-sm font-semibold">{{ day.label }}</p>
-              <p class="mt-1 text-xs theme-muted">{{ day.entries.length }} airing</p>
-            </header>
+        <div v-else class="pb-1">
+          <div class="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-7">
+            <article v-for="day in days" :key="day.key" class="theme-day overflow-hidden rounded-2xl">
+              <header class="border-b border-(--border) px-4 py-3 md:px-3">
+                <p class="text-sm font-semibold">{{ day.label }}</p>
+                <p class="mt-1 text-xs theme-muted">{{ day.entries.length }} airing</p>
+              </header>
 
-            <div class="space-y-2 py-2">
-              <button v-for="entry in day.entries" :key="entry.id" type="button"
-                class="theme-entry group w-full rounded-sm p-2 text-left"
-                @mouseenter="setPreviewFromEvent(entry, $event)" @mousemove="updatePreviewPosition"
-                @focus="setPreviewFromEvent(entry, $event)" @mouseleave="hidePreview" @blur="hidePreview">
-                <div class="flex items-center justify-between gap-2 text-xs theme-subtle">
-                  <span>{{ formatTime(entry.airingAt) }}</span>
-                  <span>Ep {{ entry.episode }}</span>
-                </div>
+              <div class="space-y-2 py-2">
+                <button v-for="entry in day.entries" :key="entry.id" type="button"
+                  class="theme-entry group w-full rounded-sm p-2 text-left"
+                  @mouseenter="setPreviewFromEvent(entry, $event)" @mousemove="updatePreviewPosition"
+                  @focus="setPreviewFromEvent(entry, $event)" @mouseleave="hidePreview" @blur="hidePreview">
+                  <div class="flex items-center justify-between gap-2 text-xs theme-subtle">
+                    <span>{{ formatTime(entry.airingAt) }}</span>
+                    <span>Ep {{ entry.episode }}</span>
+                  </div>
 
-                <p class="my-2 line-clamp-1 text-[14px] font-medium leading-snug capitalize">
-                  {{ formatTitle(entry.media.title.english || entry.media.title.romaji) }}
+                  <p class="my-2 line-clamp-1 text-[14px] font-medium leading-snug capitalize">
+                    {{ formatTitle(entry.media.title.english || entry.media.title.romaji) }}
+                  </p>
+
+                </button>
+
+                <p v-if="day.entries.length === 0" class="px-1 py-2 text-xs theme-subtle">
+                  Nothing airing here yet
                 </p>
-
-              </button>
-
-              <p v-if="day.entries.length === 0" class="px-1 py-2 text-xs theme-subtle">
-                Nothing airing here yet
-              </p>
-            </div>
-          </article>
+              </div>
+            </article>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </div>
 
   <teleport to="body">
     <div v-if="activeEntry && showPreview"
