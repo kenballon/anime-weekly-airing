@@ -176,7 +176,7 @@ watch([season, year, mediaFilter], () => {
       Error: {{ error }}
     </div>
 
-    <div v-else class="grid grid gap-4 md:grid-cols-3 xl:grid-cols-5 xl:gap-6 px-5">
+    <div v-else class="grid gap-4 md:grid-cols-3 xl:grid-cols-5 xl:gap-6 px-5">
       <AnimeCard v-for="anime in animes" :key="anime.id" :anime="anime" />
     </div>
 
