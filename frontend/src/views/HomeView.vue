@@ -110,7 +110,7 @@ watch([season, year, mediaFilter], () => {
       <div class="flex flex-col gap-5 xl:flex-row xl:items-end xl:justify-between">
         <div>
           <p class="text-xs uppercase tracking-[0.18em] theme-subtle">Anime Explorer</p>
-          <h1 class="mt-2 capitalize font-bold pb-4">Seasonal anime and weekly airings</h1>
+          <h1 class="mt-2 capitalize font-bold pb-4">Seasonal Anime shows</h1>
           <p class="mt-2 max-w-3xl text-sm theme-muted py-1">
             Season: {{ seasonLabel }} · {{ mediaFilterLabel }}
           </p>
